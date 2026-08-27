@@ -1,0 +1,48 @@
+Crucible
+Copyright 2026 Peonist AI
+
+This product includes software developed by third parties, as set out below.
+
+--------------------------------------------------------------------------------
+
+IFEval instruction-following checkers
+packages/crucible-bench/crucible_bench/ifeval.py
+
+Ported checker by checker from the reference implementation in
+google-research/google-research, at instruction_following_eval/ (instructions.py,
+instructions_util.py, instructions_registry.py):
+
+    Copyright 2026 The Google Research Authors.
+    Licensed under the Apache License, Version 2.0.
+
+That port deviates from the reference deliberately in several places — an
+unrecognized instruction id raises rather than scoring as followed, and a missing
+langdetect is a hard error rather than a detection failure. Those deviations are
+documented in the module docstring. Strict-mode accuracy only; the reference's
+"loose" variant is not reported.
+
+--------------------------------------------------------------------------------
+
+GGUF container format and ggml block layouts
+packages/crucible/crucible/gguf.py
+packages/crucible/crucible/quant_types.py
+
+These modules read the GGUF container format and compute exact bits-per-weight
+from the ggml block layouts described in ggml/src/gguf.cpp and
+ggml/src/ggml-common.h in llama.cpp:
+
+    Copyright (c) 2023-2026 The ggml authors
+    Licensed under the MIT License.
+
+No llama.cpp code is copied or redistributed here, and crucible takes no
+llama.cpp dependency at runtime or build time. These are independent
+implementations written against the documented format, and the distortion
+figures in quant_types.py are our own measurements. The attribution is offered
+as a courtesy to the authors of the format.
+
+--------------------------------------------------------------------------------
+
+Note on dependencies: packages declared in pyproject.toml (torch, transformers,
+datasets, huggingface-hub, and the optional extras) are installed from their own
+distributions and are not redistributed as part of this work. They carry their
+own licenses and are not covered by this file.

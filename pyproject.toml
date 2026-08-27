@@ -1,0 +1,34 @@
+# Workspace root. Deliberately not a package itself — neither half of this
+# repo owns the root, because they are genuinely separate concerns:
+#
+#   packages/crucible/        compression. Produces weights. Needs torch.
+#   packages/crucible-bench/  measurement. Talks to an endpoint. Does not.
+#
+# They share no imports. The only thing crossing the boundary is files:
+# crucible writes a model plus `compression_metadata.json`, crucible-bench
+# writes result JSON, and `crucible-bench compare` diffs two of those.
+#
+# Splitting them means you can `uv pip install crucible-bench` on a laptop
+# that only ever talks to a remote server and never pull a 2GB torch wheel.
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Both package roots, so isort classifies `crucible` and `crucible_bench` as
+# first-party. Without this the workspace layout makes them look third-party
+# and every test file's import block gets flagged.
+src = ["packages/crucible", "packages/crucible-bench"]
+# Agent-probe sandboxes are fixtures, not source — some contain deliberate bugs
+# and messy imports that the probed model is supposed to find and fix.
+exclude = ["packages/crucible-bench/crucible_bench/agent_probes/tasks/*/sandbox"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+# Both packages' suites. scripts/ holds runnable tools, not test modules.
+testpaths = ["packages/crucible/tests", "packages/crucible-bench/tests"]
+pythonpath = ["packages/crucible", "packages/crucible-bench"]

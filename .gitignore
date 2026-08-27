@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model weights and large files. Compression writes multi-GB artifacts; none of
+# it belongs in git, and `compression_metadata.json` is enough to regenerate a
+# run's output anyway.
+/models/
+/outputs/
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Logs and benchmark results. `crucible-bench` writes one JSON per run into
+# results/ by default — those are your measurements, not the tool's.
+/logs/
+/results/
+wandb/
+
+# Agent-probe run artifacts (per-run timestamped transcripts)
+runs/
+
+# Environment
+.env
+.claude/

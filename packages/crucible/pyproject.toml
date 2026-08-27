@@ -1,0 +1,49 @@
+[project]
+name = "crucible"
+version = "0.1.0"
+description = "MoE expert compression toolkit — prune, merge, and forge specialist models for local inference"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Peonist AI" }]
+keywords = ["moe", "mixture-of-experts", "pruning", "quantization", "llm", "compression"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# Kept deliberately small — every direct dependency is a name someone can take
+# over. accelerate, safetensors and pyyaml were declared but never imported;
+# scipy was one function (see crucible/methods/assignment.py). numpy is listed
+# because we import it directly, though torch already pulls it in.
+#
+# Benchmarking deps are NOT here: that is crucible-bench's tree, not this one.
+dependencies = [
+    "torch>=2.4",
+    # 5.5+ required: Gemma 4 and Qwen 3.5/3.6 MoE modeling code does not exist in 4.x
+    "transformers>=5.5",
+    "datasets>=3.0",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+]
+
+[project.urls]
+Homepage = "https://github.com/peonist-ai/crucible"
+Repository = "https://github.com/peonist-ai/crucible"
+
+[project.scripts]
+crucible = "crucible.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["crucible*"]
