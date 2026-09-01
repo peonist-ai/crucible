@@ -29,7 +29,7 @@ dependencies = [
 # the tokenizer data once: python -m nltk.downloader punkt punkt_tab
 ifeval = [
     "langdetect>=1.0.9",
-    "nltk>=3.10.0",
+    "nltk>=3.10.3",
 ]
 # BFCL multi-turn is state-graded: the score is a diff of the simulated APIs'
 # public attributes after the model's calls versus after ground truth's. Those
