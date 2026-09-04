@@ -24,7 +24,7 @@ dependencies = [
     "torch>=2.4",
     # 5.5+ required: Gemma 4 and Qwen 3.5/3.6 MoE modeling code does not exist in 4.x
     "transformers>=5.10.1",
-    "datasets>=3.0",
+    "datasets>=5.0.1",
     "numpy>=1.26",
 ]
 
