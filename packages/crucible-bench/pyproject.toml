@@ -18,7 +18,7 @@ classifiers = [
 # is stdlib urllib on purpose — a benchmark harness is a bad place to acquire
 # dependencies, and this one installs anywhere you can reach an endpoint from.
 dependencies = [
-    "datasets>=3.0",
+    "datasets>=5.0.1",
     "huggingface-hub>=0.24",
 ]
 
