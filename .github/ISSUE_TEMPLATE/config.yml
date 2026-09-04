@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or replication report
+    url: https://github.com/peonist-ai/crucible/discussions
+    about: "\"Will this work on my model?\", \"I compressed X and got Y\", ratio and calibration-mix advice."
+  - name: Security issue
+    url: https://github.com/peonist-ai/crucible/blob/main/SECURITY.md
+    about: Report privately. Do not open a public issue.
+  - name: Contributing guide
+    url: https://github.com/peonist-ai/crucible/blob/main/CONTRIBUTING.md
+    about: Setup, the package boundary CI enforces, and the "no silent passes" rule.

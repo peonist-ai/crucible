@@ -1,0 +1,68 @@
+name: Bug report
+description: Something in crucible or crucible-bench does the wrong thing
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security issues do not go here — see [SECURITY.md](../blob/main/SECURITY.md).
+
+        Questions ("will this work on my model?", "what ratio should I use?") are a
+        better fit for [Discussions](../discussions).
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Which package
+      description: The two share no imports, so this narrows it a lot.
+      options:
+        - crucible (compression — produces weights)
+        - crucible-bench (measurement — produces scores)
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, what you got. Paste the error if there is one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: The command you ran
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: metadata
+    attributes:
+      label: compression_metadata.json
+      description: |
+        For a compression bug this is the single most useful thing you can attach —
+        it is the replay key, enough to regenerate the run. Skip it for a
+        crucible-bench issue, or if the run never got far enough to write one.
+      render: json
+
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: HuggingFace id, or the architecture if it is not published.
+      placeholder: Qwen/Qwen3.5-35B-A3B
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, GPU/accelerator, and the output of `uv run python -c "import torch; print(torch.__version__)"` if torch is involved.
+      value: |
+        OS:
+        Accel:   GPU or Apple silicon, and the driver stack (CUDA / ROCm / Metal), or CPU-only
+        Python:
+        torch:
+      render: text

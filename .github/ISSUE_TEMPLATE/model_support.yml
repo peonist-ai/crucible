@@ -1,0 +1,55 @@
+name: Model architecture support
+description: An MoE architecture that has no registry entry yet, or one whose entry is wrong
+labels: [architecture]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Adding an architecture is one `ModelAttrs` entry in
+        `packages/crucible/crucible/models/registry.py` — no CLI change, no method
+        change. If you are willing to send that as a pull request, say so below and
+        this issue becomes the place to work out where its router and experts live.
+
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: HuggingFace id, or a link to the architecture.
+      placeholder: deepseek-ai/DeepSeek-V3
+    validations:
+      required: true
+
+  - type: textarea
+    id: shape
+    attributes:
+      label: MoE shape
+      description: From the model's `config.json`. Whatever you do not know, leave blank.
+      value: |
+        experts:        
+        active per tok: 
+        shared expert:  yes / no
+        expert storage: tensor3d (stacked) / modulelist (separate)
+        gate_up_proj:   fused / separate
+        grouped router: n_group / topk_group present in config? 
+      render: text
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contributing
+    attributes:
+      label: Are you planning to send the registry entry yourself?
+      options:
+        - "Yes — I'll open a PR"
+        - "No — requesting support"
+        - "Maybe, with some pointers"
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything already tried
+      description: |
+        Error output from a run that failed to resolve the architecture is useful
+        here — especially if it got past loading and failed later.
