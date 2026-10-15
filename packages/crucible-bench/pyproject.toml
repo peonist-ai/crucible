@@ -19,7 +19,7 @@ classifiers = [
 # dependencies, and this one installs anywhere you can reach an endpoint from.
 dependencies = [
     "datasets>=5.1.0",
-    "huggingface-hub>=0.24",
+    "huggingface-hub>=2.2.0",
 ]
 
 [project.optional-dependencies]
